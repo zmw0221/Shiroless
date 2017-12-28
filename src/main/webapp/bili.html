@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>哔哩哔哩弹幕视频网 - ( ゜- ゜)つロ 乾杯~ - bilibili</title>
+
+ <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="themes/icon.css">
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.easyui.min.js"></script>
+   <script type="text/javascript">
+   		
+   		
+   		
+   		
+   </script>
+  <style type="text/css">
+  	img{
+ width:auto;
+ height:auto;
+ max-width:100%;
+ max-height:100%;
+}
+  </style>
+  
+</head>
+<body>
+	<div class="easyui-layout" style="width:100%;height:100%;">
+  		<!-- 上北只能设置高度 一般不会设置宽度 -->
+		<div data-options="region:'north'" style="height:15%"></div>
+		
+		<div data-options="region:'south',split:true" style="height:17%"></div>
+		
+		<div data-options="region:'center'" style="height:65%">
+			<div class="easyui-layout" style="width:100%;height:100%; align:center">
+			
+				<div data-options="region:'west',split:true"  style="width:60%;height:65%">
+					<div style="width:100%;height:100%">
+					<img  src="timg.jpg">
+					</div>
+				</div>
+			
+				<div data-options="region:'east',split:true"  style="width:40%;height:65%">
+					<form id="ss" action="loginShiro" method="post" enctype="multipart/form-data">
+	    				<table cellpadding="5" align="center">
+
+	    					<tr>
+	    				
+	    						<td><input class="easyui-textbox" type="text" name="userName" data-options="required:true,missingMessage:'请告诉我你的昵称吧'"></input></td>
+	    					</tr>
+	    					<tr>
+	    				
+	    						<td><input class="easyui-textbox" type="text" name="password" data-options="required:true,missingMessage:'密码不能小于6个字符',validType:'length[6,16]'"></input></td>
+	    					</tr>	
+	    					<tr>
+	    						<td><a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitSaveForm()">登录</a></td>	
+	    	
+	    					</tr>	
+	    				</table>
+	   	   			</form>
+				</div>	
+			</div>
+		</div>
+		
+	</div>
+</body>
+</html>

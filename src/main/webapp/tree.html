@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>crud.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="themes/icon.css">
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.easyui.min.js"></script>
+   <script type="text/javascript">
+   		
+   		function queryCook(){
+   		//$("input[name='foodname']").val()=$("#f").textbox("getValue")
+   			var fname=$("#f").textbox("getValue");
+   			//ajax=queryFood?foodname=foodname
+   			//easyui所有的方法的调用
+   			//控件对象.控件名称('方法名','方法参数')
+   			$("#tb").datagrid("load",{
+   				fname:fname
+   				
+   			});
+   		}
+   		
+   		$(function(){
+   			$("#tt").tree({
+   				onSelect:function(node){
+   					var id=node.id;
+   					$("#tb").datagrid("load",{
+   						id:id
+   					})
+   				}
+   			});
+   			$('#cc').combobox({    
+   				 url:'Cooking',    
+   				 valueField:'cid',    
+  				  textField:'cname'   
+				});  
+   			$('#ccd').combobox({    
+  				 url:'Cooking',    
+  				 valueField:'cid',    
+ 				  textField:'cname'   
+				});  
+ 
+   			
+   		})
+   		
+   		
+   		
+   		function submitSaveForm(){
+   			$("#ss").form('submit',{
+   				url:'saveCook',
+   				success:function(msg){
+   					
+   					msg=JSON.parse(msg);
+   					if(msg.code==1){
+   						alert("新增成功");
+   						$("#s").window("close");
+						queryCook();
+   					}else{
+   						alert("添加失败");			
+   					}
+   				}
+   			})
+   		}
+   		function submitUpdateForm(){
+   			
+   			$("#ff").form('submit',{
+   				url:'saveCook',
+   				success:function(msg){
+   					
+   					msg=JSON.parse(msg);
+   					if(msg.code==1){
+   						alert("修改成功");
+   						$("#w").window("close");
+						queryCook();
+   					}else{
+   						alert("修改失败");			
+   					}
+   				}
+   			})
+   		}
+   		
+   	
+   		$(function(){
+   		//设置data-options
+   			$("#tb").datagrid({
+   				rownumbers:true,
+   				toolbar:[{
+   					iconCls:'icon-add',
+   					text:'新增',
+   					onClick:function(){
+   						$("#s").window("open");
+   					
+   					}
+   					
+   				},{
+   					iconCls:'icon-edit',
+   					text:'修改',
+   					onClick:function(){
+   						var selectedPow= $("#tb").datagrid("getSelected");
+   						if(selectedPow==null){
+   							alert("请选择数据");
+   							return ;
+   						}
+   						$("#w").window("open");
+   						$("#ff").form('load',selectedPow)
+   					}
+   				},{
+   					iconCls:'icon-remove',
+   					text:'删除',
+   					onClick:function(){
+   						var selectedPow= $("#tb").datagrid("getSelections");
+   						
+   						if(selectedPow==null){
+   							alert("请选择数据");
+   							return ;
+   						}
+   						for(var i=0;i<selectedPow.length;i++){
+   							var fid=selectedPow[i].fid;
+
+   							$.ajax({
+   								url:'delete/'+fid,
+   								method:'POST',
+   								dataType:'json',
+   								data:'_method=delete',
+   								success:function(msg){
+   									if(msg.code==1){
+   										alert("删除成功");
+   										queryCook();
+   									}else{
+   										alert("删除失败");
+   									}
+   								}
+   							});
+   						}
+   					}
+   				}]
+   			
+   			})
+   		})
+   		
+   </script>
+
+  </head>
+  
+  <body style="padding:1px;margin:1px">
+  	
+  	
+  	
+  	<div class="easyui-layout" style="width:100%;height:100%;">
+  		<!-- 上北只能设置高度 一般不会设置宽度 -->
+		<div data-options="region:'north'" style="height:15%"></div>
+		<div data-options="region:'west',split:true" title="菜系大全" style="width:17%;">
+			<!-- 添加菜单栏 -->
+			<div class="easyui-accordion" style="width:95%;height:100%;">
+				<ul id="tt" class="easyui-tree" data-options="url:'queryCookIng'"></ul>
+			</div>	
+		</div>
+		<div align="center" data-options="region:'center',iconCls:'icon-ok'">
+			菜系名:<input id="f" class="easyui-textbox" type="text" name="fname" data-options="required:true"></input>
+  			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="queryCook()">查询</a>
+			<!-- 添加内容 -->
+			<table id="tb" class="easyui-datagrid" title="Basic DataGrid" style="width:300px;height:280px"
+			data-options="singleSelect:false,collapsible:true,url:'queryk',method:'get',pagination:true">
+				<thead >
+					<tr>
+					<th align="center" data-options="field:'fid',width:120">菜品编号</th>
+					<th align="center" data-options="field:'fname',width:130">菜品名称</th>
+
+					</tr>
+				</thead>
+			</table>
+			
+			 <div id="w" class="easyui-window" title="菜系修改" data-options="iconCls:'icon-edit',closed:true" style="width:300px;height:180px;padding:5px;">
+
+			<form id="ff" method="post">
+			<input type="hidden" name="_method" value="put"/>
+	    		<table cellpadding="5">
+	    		<tr>
+	    			<td>菜系名称:</td>
+	    			<td><input class="easyui-textbox" type="text" name="fname" data-options="required:true"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>所属国家:</td>
+	    			<td><input id="cc" name="cid" value=""></td>
+	    		</tr>
+	    		
+	    	</table>
+	   	   </form>
+	    <div style="text-align:center;padding:5px">
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitUpdateForm()">修改</a>
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">取消</a>
+	    </div>
+	</div>
+			
+			<div id="s" class="easyui-window" title="添加菜系" data-options="iconCls:'icon-edit',closed:true" style="width:300px;height:200px;padding:5px;">
+			<form id="ss" method="post" enctype="multipart/form-data">
+	    		<table cellpadding="5">
+	    		<tr>
+	    			<td>菜系名称:</td>
+	    			<td><input class="easyui-textbox" type="text" name="fname" data-options="required:true,missingMessage:'请输入菜系名'"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>所属国家:</td>
+	    			<td><input id="ccd" name="cid" value=""></td>
+	    		</tr>
+	    		</table>
+	   	   </form>
+	    <div style="text-align:center;padding:5px">
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitSaveForm()">增加</a>
+	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">取消</a>
+	    </div>
+	</div>	
+		</div>
+	</div>
+  	
+  </body>
+</html>

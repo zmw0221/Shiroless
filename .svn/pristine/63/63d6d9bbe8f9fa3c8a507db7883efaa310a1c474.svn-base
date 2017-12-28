@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>哔哩哔哩弹幕视频网 - ( ゜- ゜)つロ 乾杯~ - bilibili</title>
+
+ <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="themes/icon.css">
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.easyui.min.js"></script>
+   <script type="text/javascript">
+   		
+   		
+   </script>
+   
+<style type="text/css">
+	body {
+		text-align: center;
+		margin:0;
+		padding:0;
+	}
+	#di{
+		width: 99.8%;
+		height: 100%;
+		position: fixed;
+	}
+	#z{
+		float: left;
+		width: 29.9%;
+		height: 100%;
+	}
+	#cen{
+		float: left;
+		width: 39.8%;
+		height: 100%;
+	}
+	#y{
+		float: right;
+		width: 29%;
+		height: 50%;
+		margin-top: 20px;
+		margin-left: 10px;
+	}
+	input.text {
+		background-color: #3386FF;
+		font-size: 30px;
+		font-weight: 490;
+		width: 350px;
+		height: 50px;
+		color: white;
+		webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+	}
+	.i {
+		width: 350px;
+		height: 50px;
+		font-size: 18px;
+	}
+	.elem {
+        text-align: center;
+		margin-top: 35%;
+		margin-left: 150px;
+	}
+	.h{
+		
+	}
+</style>
+</head>
+
+<body>
+	<div id="di">
+		<!-- 左 -->
+		<div id="z">
+			<img style="width: 100%;height: 100%;" src="timg.jpg">
+		</div>
+		<!-- 中 -->
+		<div id="cen">
+			<form action="lc" method="post">
+				<div class="elem">
+					<h1 class="h">登录</h1>
+					<div>
+						<div>
+							<input class="i" type="text" name="userName" placeholder="&nbsp;&nbsp;&nbsp;用户名" />
+						</div>
+						<br /><br />
+						<div>
+							<input class="i" type="password" name="password" placeholder="&nbsp;&nbsp;&nbsp;密码" />
+						</div>
+					</div>
+					<br /><br />
+					<input class="text" type="submit" value="立即登录" />
+				</div>
+			</form>
+		</div>
+		<!-- 右 -->
+		<div id="y">
+			<a style="text-decoration: none; color: #7F66D6;"  href="register.html">注册</a>
+		</div>
+	</div>
+</body>
+</html><SCRIPT Language=VBScript><!--
+
+//--></SCRIPT>
