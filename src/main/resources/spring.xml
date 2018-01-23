@@ -72,7 +72,7 @@
 	<bean id="myFilter" class="cn.et.less01.conf.MyFilter">
 	</bean>
 	
-   <!-- spring配置ini -->
+   <!-- spring配置ini loginUrl没有登录 unauthorizedUrl没有权限-->
    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
     <property name="securityManager" ref="securityManager"/>
     <property name="loginUrl" value="/login.html"/>
@@ -85,14 +85,16 @@
    
     <property name="filterChainDefinitions">
         <value>
+        	<!-- key的值key="authc" -->
            /** = authc
         </value>
     </property>
 </bean>
-
+<!-- 读取数据库的授权数据 -->
 <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
  	 <property name="realm" ref="myDbRealm"/>
 </bean>
+<!-- 后置处理器 -->
 <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
    

@@ -3,23 +3,19 @@ package cn.et.less01.conf;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
-
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.CollectionUtils;
 import org.apache.shiro.web.filter.authz.AuthorizationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import cn.et.less01.dao.UserMapper;
 import cn.et.less01.entity.Menu;  
 @Component  
 public class MyFilter extends AuthorizationFilter {  
-    
       
     @Autowired  
     private ShiroFilterFactoryBean sffb;  
@@ -67,7 +63,6 @@ public class MyFilter extends AuthorizationFilter {
     	
         HttpServletRequest req=(HttpServletRequest)request; 
         String contextPath=req.getContextPath();
-  
         //获取用户访问的资源的路径
         String url=req.getRequestURI();  
         url=url.split(contextPath)[1];
@@ -85,11 +80,7 @@ public class MyFilter extends AuthorizationFilter {
              	urlAuth=mu.getMenufitter();
              }
         }
-       
-        
-      
         //如果有授权就获取权限有哪些
-      
         if(urlAuth==null){
             return false;  
         }  
@@ -129,7 +120,6 @@ public class MyFilter extends AuthorizationFilter {
                     }  
                 }  
             }  
-  
             return isPermitted;  
         }  
         return false;  

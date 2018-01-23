@@ -1,5 +1,4 @@
 package cn.et;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -17,7 +16,6 @@ public class TestShiro {
 		Factory<org.apache.shiro.mgt.SecurityManager> factory = new IniSecurityManagerFactory("classpath:my.ini");
 		org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
 		SecurityUtils.setSecurityManager(securityManager);
-		
 		//获取当前的用户
 		Subject currentUser = SecurityUtils.getSubject();
 		//当前用户的会话
@@ -30,8 +28,8 @@ public class TestShiro {
          *     credentials（凭证）表示用户用于登录的凭证 比如密码 证书等  
          */  
 		if ( !currentUser.isAuthenticated() ) {
+			//用户输入的用户名和密码
 			 UsernamePasswordToken token = new UsernamePasswordToken("jiaozi", "123456");
-			
 			 try {
 				    currentUser.login( token );
 				   System.out.println("登录成功");
@@ -45,7 +43,6 @@ public class TestShiro {
 				   if(currentUser.isPermitted("user:delete:1")){
 					   System.out.println("拥有与删除1的权限");
 				   }
-				   
 				} catch ( UnknownAccountException uae ) {
 				   System.out.println("账号错误");
 				} catch ( IncorrectCredentialsException ice ) {

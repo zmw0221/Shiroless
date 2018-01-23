@@ -22,32 +22,25 @@ public class SpringLoginController {
 	
 	@RequestMapping("/loginShiro")
 	public String Login(String userName,String password,Model model){
-		
+		//获取当前的用户
 		Subject currentUser = SecurityUtils.getSubject();
+		//获取页面传过来的用户名和密码
 		 UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
 		 try {
 			    currentUser.login( token );
 			    model.addAttribute("menuList", um.queryMenuByMenu(userName));
-			    
 			   //是否认证通过
-			   
 			   return "/save.jsp";
-			   
 			} catch ( UnknownAccountException uae ) {
-			   System.out.println("账号错误");
-			  
+			   System.out.println("账号错误");  
 			} catch ( IncorrectCredentialsException ice ) {
 			    System.out.println("密码不匹配");
-			 
 			} catch ( LockedAccountException lae ) {
-				System.out.println("账号被锁定");
-				
+				System.out.println("账号被锁定");	
 			} catch ( AuthenticationException ae ) {
 			   System.out.println("未知错误");
 			}
 		 return "/un.html";
 	}
-	
-	
-	
+
 }

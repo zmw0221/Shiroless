@@ -5,7 +5,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -31,11 +30,11 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//获取页面传过来的用户名和密码
 		String username=request.getParameter("userName");
 		String password=request.getParameter("password");
 		//获取当前的用户
 		Subject currentUser = SecurityUtils.getSubject();
-
 		 UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 		 try {
 			    currentUser.login( token );

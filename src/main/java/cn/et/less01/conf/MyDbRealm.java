@@ -1,7 +1,5 @@
 package cn.et.less01.conf;
-
 import java.util.Set;
-
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -13,7 +11,6 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import cn.et.less01.dao.UserMapper;
 import cn.et.less01.entity.UserInfo;
 
@@ -39,8 +36,9 @@ public class MyDbRealm extends AuthorizingRealm{
 		Set<String> pemsList=um.queryPemsByName(userName);
 		//角色和权限集合对象
 		SimpleAuthorizationInfo at=new SimpleAuthorizationInfo();
-
-			at.setRoles(roleList);
+		//设置用户的角色
+		at.setRoles(roleList);
+		//设置用户的权限
 			at.setStringPermissions(pemsList);
 		return at;
 	}
@@ -57,11 +55,11 @@ public class MyDbRealm extends AuthorizingRealm{
 		 //查询数据库是否有这个账号
 		 System.out.println(upt.getPassword());
 		 System.out.println(token.getPrincipal());
-		
+		 //查询数据的用户和密码
 		 UserInfo queryUs = um.queryUser(token.getPrincipal().toString());
-		 
 		 //判断账号密码是否一致
 		 if(queryUs!=null && queryUs.getPassword().equals(new String(upt.getPassword()))){
+			 //登录成功
 			 SimpleAccount sa = new  SimpleAccount(upt.getUsername(),upt.getPassword(),"MyDbRealm");
 			 return sa;
 		 }
